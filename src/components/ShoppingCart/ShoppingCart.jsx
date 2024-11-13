@@ -22,7 +22,7 @@ function ShoppingCart() {
     if (
       itemName.trim() !== "" &&
       quantity.trim() !== "" &&
-      parseInt(quantity) > 0
+      Number(quantity) > 0
     ) {
       setItems((i) => [...i, { itemName, quantity }]);
 
@@ -37,7 +37,7 @@ function ShoppingCart() {
   }
 
   function updateQuantity(index, newQuantity) {
-    if (parseInt(newQuantity) > 0) {
+    if (Number(newQuantity) > 0) {
       const updatedItems = items.map((item, i) =>
         i === index ? { ...item, quantity: newQuantity } : item
       );
