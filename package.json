@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Jonnerop.github.io/coding-marathon1-group6/",
+  "homepage": "https://Jonnerop.github.io/cm1-group6/",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
