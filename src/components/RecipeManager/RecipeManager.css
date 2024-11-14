@@ -1,0 +1,109 @@
+/* Recipe Manager styles */
+
+/* General styles */
+.rm-container {
+    font-family: 'Garamond', serif;
+    background-color: #627752 !important;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Page title */
+.rm-title {
+    text-align: center;
+    color: #edf0e6 !important;
+    margin-bottom: 35px;
+}
+
+.rm-contents{
+    background-color: #a1ba99 !important;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styles */
+.rm-section-title, .rm-recipe-name {
+    color: #583a24 !important;
+    margin: 0;
+}
+
+/* Add recipe styles */
+.rm-add-recipe {
+    background-color: #ecf5e8 !important;
+    border-radius: 10px;
+    padding: 20px !important;
+    margin: 0 0 15px 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.rm-input-con {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0 !important;
+    padding: 0 !important;
+    background-color: #ecf5e8 !important;
+}
+
+.rm-input {
+    padding: 10px;
+    border: 1px solid #c5e1a5 !important;
+    border-radius: 5px;
+    margin: 0px;
+    font-size: 16px;
+    width: 100%;
+}
+
+/* Button styles */
+.rm-btn, .rm-del-btn {
+    background-color: #6b8e23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.rm-del-btn {
+    padding: 5px 10px;
+    font-size: 13px;
+}
+
+button:hover {
+    background-color: #4a6b1d;
+}
+
+/* Recipe list styles */
+.rm-all-recipes {
+    background-color: #ecf5e8 !important;
+    border-radius: 10px;
+    padding: 20px !important;
+    margin: 0 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.rm-recipe-con {
+    background-color: #ffffff !important;
+    padding: 10px;
+    border: 1px solid #c5e1a5 !important;
+    border-radius: 5px;
+    margin: 10px 0 10px 0px;
+}
+
+.rm-ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.rm-recipe-text {
+    color: #333;
+}
