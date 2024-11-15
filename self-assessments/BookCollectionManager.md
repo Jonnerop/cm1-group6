@@ -3,9 +3,10 @@
 ```jsx
 import './BookCollectionManager.css';
 import React, { useState } from 'react';
+import Book from './Book';
 ```
 
-Import of stylesheet and useState hook.
+Import of stylesheet. Book and useState hook.
 
 ```jsx
 function BookCollectionManager() {
@@ -106,20 +107,14 @@ The `moveBookUp` and `moveBookDown` functions allow users to change the order of
       </div>
       <ol>
         {books.map((book, index) => (
-          <li key={index}>
-            {book.title} by {book.author} published in {book.year}
-            <div className="buttons">
-              <button onClick={() => deleteBook(index)} className="deleteBtn">
-                Delete
-              </button>
-              <button className="moveUp" onClick={() => moveBookUp(index)}>
-                Up
-              </button>
-              <button className="moveDown" onClick={() => moveBookDown(index)}>
-                Down
-              </button>
-            </div>
-          </li>
+          <Book
+            key={index}
+            book={book}
+            index={index}
+            deleteBook={deleteBook}
+            moveBookUp={moveBookUp}
+            moveBookDown={moveBookDown}
+          />
         ))}
       </ol>
     </div>
@@ -134,6 +129,31 @@ export default BookCollectionManager;
 ```
 
 Exporting component.
+
+```jsx
+function Book({ book, index, deleteBook, moveBookUp, moveBookDown }) {
+  return (
+    <li>
+      {book.title} by {book.author} published in {book.year}
+      <div className="buttons">
+        <button onClick={() => deleteBook(index)} className="deleteBtn">
+          Delete
+        </button>
+        <button className="moveUp" onClick={() => moveBookUp(index)}>
+          Up
+        </button>
+        <button className="moveDown" onClick={() => moveBookDown(index)}>
+          Down
+        </button>
+      </div>
+    </li>
+  );
+}
+
+export default Book;
+```
+
+The Book component represents a single book in the collection. It encapsulates the logic for displaying book details and managing individual book operations like delete and rearrange.
 
 ### Page styling:
 
