@@ -1,5 +1,6 @@
 import './BookCollectionManager.css';
 import React, { useState } from 'react';
+import Book from './Book';
 
 function BookCollectionManager() {
   const [books, setBooks] = useState([]);
@@ -9,24 +10,20 @@ function BookCollectionManager() {
     year: new Date().getFullYear(),
   });
 
-  // Handle input change for both fields
   function handleInputChange(event) {
     const { name, value } = event.target;
     setNewBook((prevBook) => ({ ...prevBook, [name]: value }));
   }
 
-  // Add a new book to the list
   function addBook() {
     if (newBook.title.trim() !== '' && newBook.author.trim() !== '') {
       setBooks((b) => [...b, newBook]);
-      setNewBook({ title: '', author: '', year: new Date().getFullYear() }); // Clear the input fields
+      setNewBook({ title: '', author: '', year: new Date().getFullYear() });
     }
   }
 
-  // Delete a book from the list
   function deleteBook(index) {
-    const updatedBooks = books.filter((_, i) => i !== index);
-    setBooks(updatedBooks);
+    setBooks(books.filter((_, i) => i !== index));
   }
 
   function moveBookUp(index) {
@@ -80,20 +77,14 @@ function BookCollectionManager() {
       </div>
       <ol>
         {books.map((book, index) => (
-          <li key={index}>
-            {book.title} by {book.author} published in {book.year}
-            <div className="buttons">
-              <button onClick={() => deleteBook(index)} className="deleteBtn">
-                Delete
-              </button>
-              <button className="moveUp" onClick={() => moveBookUp(index)}>
-                Up
-              </button>
-              <button className="moveDown" onClick={() => moveBookDown(index)}>
-                Down
-              </button>
-            </div>
-          </li>
+          <Book
+            key={index}
+            book={book}
+            index={index}
+            deleteBook={deleteBook}
+            moveBookUp={moveBookUp}
+            moveBookDown={moveBookDown}
+          />
         ))}
       </ol>
     </div>

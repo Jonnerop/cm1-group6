@@ -19,8 +19,8 @@ function BookCollectionManager() {
 
 The component maintains two pieces of state:
 
-- ``books``: An array to store all the books added by the user.
-- ``newBook``: An object representing the book being currently entered in the input fields, initialized with empty title and author fields and the current year.
+- `books`: An array to store all the books added by the user.
+- `newBook`: An object representing the book being currently entered in the input fields, initialized with empty title and author fields and the current year.
 
 ```jsx
 function handleInputChange(event) {
@@ -29,7 +29,7 @@ function handleInputChange(event) {
 }
 ```
 
-The ``handleInputChange`` function ensures the component responds to user input dynamically. It uses the name attribute to update the corresponding field in newBook.
+The `handleInputChange` function ensures the component responds to user input dynamically. It uses the name attribute to update the corresponding field in newBook.
 
 ```jsx
 function addBook() {
@@ -40,7 +40,7 @@ function addBook() {
 }
 ```
 
-The ``addBook`` function checks for non-empty ``title`` and ``author`` fields before adding a book to the collection. After successfully adding a book, it resets the ``newBook`` state to its initial values.
+The `addBook` function checks for non-empty `title` and `author` fields before adding a book to the collection. After successfully adding a book, it resets the `newBook` state to its initial values.
 
 ```jsx
 function deleteBook(index) {
@@ -49,7 +49,7 @@ function deleteBook(index) {
 }
 ```
 
-The ``deleteBook`` function removes a book at a specific index using ``filter``. This ensures the list dynamically updates without directly mutating the state.
+The `deleteBook` function removes a book at a specific index using `filter`. This ensures the list dynamically updates without directly mutating the state.
 
 ```jsx
 function moveBookUp(index) {
@@ -73,7 +73,8 @@ function moveBookDown(index) {
   }
 }
 ```
-The ``moveBookUp`` and ``moveBookDown`` functions allow users to change the order of their book list. This was extra functionality not included in the starter. Both functions perform index swapping and update the state accordingly.
+
+The `moveBookUp` and `moveBookDown` functions allow users to change the order of their book list. This was extra functionality not included in the starter. Both functions perform index swapping and update the state accordingly.
 
 ```jsx
   return (
@@ -125,7 +126,8 @@ The ``moveBookUp`` and ``moveBookDown`` functions allow users to change the orde
   );
 }
 ```
-The ``return`` statement builds the UI. It includes input fields for adding books and displays the book collection as an ordered list (``<ol>``). Each book in the list has buttons for deletion and reordering.
+
+The `return` statement builds the UI. It includes input fields for adding books and displays the book collection as an ordered list (`<ol>`). Each book in the list has buttons for deletion and reordering.
 
 ```jsx
 export default BookCollectionManager;
@@ -135,10 +137,10 @@ Exporting component.
 
 ### Page styling:
 
-I learned a new phrase in doing this, the ``!important`` when overriding css. I should start to use ``rem`` instead of ``px`` as a rule.
+I learned a new phrase in doing this, the `!important` when overriding css. I should start to use `rem` instead of `px` as a rule.
 
 ### Self-assessment
 
-I relied heavily on the starter code for the component, enhancing it to my liking and adding the "move elements" functionality. I consciously chose to focus on CSS styling. During pair programming this morning, I realized my vanilla CSS skills were quite rusty. Since I’ve really only been using Tailwind in this course, I wanted a proper refresher, so I directed my focus toward improving my CSS skills. I used ChatGBT 4 to solve some css issues, that arised because of the other stylesheet overriding my component styling.
+I relied heavily on the starter code for the component, enhancing it to my liking, extracting the Book component and adding the "move elements" functionality. I consciously chose to focus on CSS styling. During pair programming this morning, I realized my vanilla CSS skills were quite rusty. Since I’ve really only been using Tailwind in this course, I wanted a proper refresher, so I directed my focus toward improving my CSS skills. I used ChatGBT 4 to solve some css issues, that arised because of the other stylesheet overriding my component styling.
 
 Working on this assignment with my team was fun, and doing these exercises (separate from the project) using Git branches has really helped build my confidence with Git. Repetition is essential for me, and it’s extremely helpful to have the team available on Zoom, so when questions arise or if I forget something, I can ask and receive help right away.
