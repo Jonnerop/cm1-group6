@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Recipe from './Recipe';
 import './RecipeManager.css';
 
 function RecipeManager() {
@@ -10,6 +11,12 @@ function RecipeManager() {
     ingredients: "",
     instructions: ""
   });
+  // Array of input fields
+  const inputFields = [
+    { name: "name", placeholder: "Name of the recipe", value: newRecipe.name },
+    { name: "ingredients", placeholder: "List of ingredients", value: newRecipe.ingredients },
+    { name: "instructions", placeholder: "Write the instructions", value: newRecipe.instructions },
+  ];
 
   // Handle the input change
   const handleChange = (e) => {
@@ -43,33 +50,18 @@ function RecipeManager() {
         <div className="rm-add-recipe">
           <h2 className="rm-section-title">Add a new recipe</h2>
           <form onSubmit={addRecipe}>
-            <div className="rm-input-con">
-              <input
-                className="rm-input"
-                type="text"
-                placeholder="Name of the recipe"
-                value={newRecipe.name}
-                onChange={handleChange}
-                name="name" />
-            </div>
-            <div className="rm-input-con">
-              <input
-                className="rm-input"
-                type="text"
-                placeholder="List of ingredients"
-                value={newRecipe.ingredients}
-                onChange={handleChange}
-                name="ingredients" />
-            </div>
-            <div className="rm-input-con">
-              <input
-                className="rm-input"
-                type="text"
-                placeholder="Write the instructions"
-                value={newRecipe.instructions}
-                onChange={handleChange}
-                name="instructions" />
-            </div>
+            {inputFields.map((field) => (
+              <div key={field.name} className="rm-input-con">
+                <input
+                  type="text"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={handleChange}
+                  className="rm-input"
+                />
+              </div>
+            ))}
             <button type="submit" className="rm-btn">Add Recipe</button>
           </form>
         </div>
@@ -77,14 +69,12 @@ function RecipeManager() {
           <h2 className="rm-section-title">Recipes</h2>
           <ul className="rm-ul">
             {recipes.map((recipe, index) => (
-              <div key={index} className="rm-recipe-con">
-                <li>
-                  <h3 className="rm-recipe-name">{recipe.name}</h3>
-                  <p className="rm-recipe-text"><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                  <p className="rm-recipe text"><strong>Instructions:</strong> {recipe.instructions}</p>
-                  <button className="rm-del-btn" onClick={() => deleteRecipe(index)}>Delete recipe</button>
-                </li>
-              </div>
+              <Recipe
+                key={index}
+                recipe={recipe}
+                index={index}
+                deleteRecipe={deleteRecipe}
+              />
             ))}
           </ul>
         </div>

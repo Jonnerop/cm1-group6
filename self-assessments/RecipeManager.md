@@ -2,7 +2,7 @@
 
 ## Requirements and Implementation
 
-### 1. **State Management**: Use the `useState` hook for the recipe list and input fields.
+### **State Management**: Use the `useState` hook for the recipe list and input fields.
 
 ```jsx
 const [recipes, setRecipes] = useState([]);
@@ -16,7 +16,7 @@ The component maintains two pieces of state:
 - `recipes`: An array to store all the recipes added by the user, initialized as an empty array.
 - `newRecipe`: An object representing the recipe being currently entered in the input fields, initialized with empty name, ingredients, and instructions fields.
 
-### 2. **Controlled Forms**: Handle inputs as controlled components.
+### **Controlled Forms**: Handle inputs as controlled components.
 
 ```jsx
 const handleChange = (e) => {
@@ -26,7 +26,34 @@ const handleChange = (e) => {
 ```
 The `handleChange` function ensures the component responds to user input dynamically. It uses the name attribute to update the corresponding field in `newRecipe`.
 
-### 3. **Functions**: Add and delete recipes through functions.
+```jsx
+const inputFields = [
+  { name: "name", placeholder: "Name of the recipe", value: newRecipe.name },
+  { name: "ingredients", placeholder: "List of ingredients", value: newRecipe.ingredients },
+  { name: "instructions", placeholder: "Write the instructions", value: newRecipe.instructions },
+];
+```
+Instead of repeating each input field manually, an array of the configurations is used to render the fields dynamically with .map():
+
+```jsx
+<form onSubmit={addRecipe}>
+  {inputFields.map((field) => (
+    <div key={field.name} className="rm-input-con">
+      <input
+        className="rm-input"
+        type="text"
+        placeholder={field.placeholder}
+        value={field.value}
+        onChange={handleChange}
+        name={field.name}
+      />
+    </div>
+  ))}
+  <button type="submit" className="rm-btn">Add Recipe</button>
+</form>
+```
+
+### **Functions**: Add and delete recipes through functions.
 
 ```jsx
 const addRecipe = (e) => {
@@ -43,69 +70,72 @@ const deleteRecipe = (index) => {
 ```
 The `addRecipe` function checks for non-empty `name`, `ingredients`, and `instructions` fields before adding a recipe to the collection. After successfully adding a recipe, it resets the `newRecipe` state to its initial empty values. The `deleteRecipe` function removes a recipe at a specific index using `filter`.
 
-### 4. **List Rendering**: Render the recipe ingredients and instructions as list items.
+### **List Rendering**: Render the recipe ingredients and instructions as list items.
 
 ```jsx
 return (
-  <div className="rm-container">
-    <h1 className="rm-title">Recipe Manager</h1>
-    <div className="rm-contents">
-      <div className="rm-add-recipe">
-        <h2 className="rm-section-title">Add a new recipe</h2>
-        <form onSubmit={addRecipe}>
-          <div className="rm-input-con">
-            <input
-              className="rm-input"
-              type="text"
-              placeholder="Name of the recipe"
-              value={newRecipe.name}
-              onChange={handleChange}
-              name="name"
-            />
-          </div>
-          <div className="rm-input-con">
-            <input
-              className="rm-input"
-              type="text"
-              placeholder="List of ingredients"
-              value={newRecipe.ingredients}
-              onChange={handleChange}
-              name="ingredients"
-            />
-          </div>
-          <div className="rm-input-con">
-            <input
-              className="rm-input"
-              type="text"
-              placeholder="Write the instructions"
-              value={newRecipe.instructions}
-              onChange={handleChange}
-              name="instructions"
-            />
-          </div>
-          <button type="submit" className="rm-btn">Add Recipe</button>
-        </form>
-      </div>
-      <div className="rm-all-recipes">
-        <h2 className="rm-section-title">Recipes</h2>
-        <ul className="rm-ul">
-          {recipes.map((recipe, index) => (
-            <div key={index} className="rm-recipe-con">
-              <li>
-                <h3 className="rm-recipe-name">{recipe.name}</h3>
-                <p className="rm-recipe-text"><strong>Ingredients:</strong> {recipe.ingredients}</p>
-                <p className="rm-recipe-text"><strong>Instructions:</strong> {recipe.instructions}</p>
-                <button className="rm-del-btn" onClick={() => deleteRecipe(index)}>Delete recipe</button>
-              </li>
-            </div>
-          ))}
-        </ul>
+    <div className="rm-container">
+      <h1 className="rm-title">Recipe Manager</h1>
+      <div className="rm-contents">
+        <div className="rm-add-recipe">
+          <h2 className="rm-section-title">Add a new recipe</h2>
+          <form onSubmit={addRecipe}>
+            {inputFields.map((field) => (
+              <div key={field.name} className="rm-input-con">
+                <input
+                  type="text"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={field.value}
+                  onChange={handleChange}
+                  className="rm-input"
+                />
+              </div>
+            ))}
+            <button type="submit" className="rm-btn">Add Recipe</button>
+          </form>
+        </div>
+        <div className="rm-all-recipes">
+          <h2 className="rm-section-title">Recipes</h2>
+          <ul className="rm-ul">
+            {recipes.map((recipe, index) => (
+              <Recipe
+                key={index}
+                recipe={recipe}
+                index={index}
+                deleteRecipe={deleteRecipe}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 ```
-The `return` statement builds the UI. It includes input fields for adding recipes and displays the recipe collection as an unordered list (`<ul>`). The recipes are list items (`<li>`). Each recipe in the list has a button for deletion.
+The `return` statement builds the UI. It includes input fields for adding recipes and displays the recipe collection as an unordered list (`<ul>`).
+
+```jsx
+import React from 'react';
+
+function Recipe({ recipe, index, deleteRecipe }) {
+    return (
+        <div className="rm-recipe-con">
+            <li>
+                <h3 className="rm-recipe-name">{recipe.name}</h3>
+                <p className="rm-recipe-text">
+                    <strong>Ingredients:</strong> {recipe.ingredients}</p>
+                <p className="rm-recipe text">
+                    <strong>Instructions:</strong> {recipe.instructions}</p>
+                <button className="rm-del-btn" onClick={() => deleteRecipe(index)}>
+                    Delete recipe</button>
+            </li>
+        </div>
+    );
+}
+
+export default Recipe;
+```
+The `Recipe` component is responsible for rendering individual recipes. It receives `recipe`, `index`, and `deleteRecipe` as props. The recipes are list items (`<li>`). Each recipe in the list has a button for deletion.
 
 ## Styling
 
